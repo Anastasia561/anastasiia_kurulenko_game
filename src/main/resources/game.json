@@ -1,0 +1,21 @@
+{
+  "questions" : [
+    {
+      "id": 0,
+      "text" : "Do you want to accept UFO challenge?",
+
+      "answers" : [{
+        "id" : 0,
+        "text" : "Accept",
+        "message" : "You accepted challenge",
+        "nextQuestionId" : 1
+      },
+        {
+          "id" : 1,
+          "text" : "Not accept",
+          "message" : "You didn't accept challenge",
+          "nextQuestionId" : -1
+        }]
+    }
+  ]
+}
