@@ -1,4 +1,4 @@
-package ua.javarush;
+package ua.javarush.game;
 
 import lombok.*;
 

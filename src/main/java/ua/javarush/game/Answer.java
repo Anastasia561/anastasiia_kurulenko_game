@@ -1,16 +1,16 @@
-package ua.javarush;
+package ua.javarush.game;
 
 import lombok.*;
-
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-public class Question {
+public class Answer {
     private Integer id;
     private String text;
-    private List<Answer> answers;
+    private String message;
+    private Integer nextQuestionId;
+
 }
