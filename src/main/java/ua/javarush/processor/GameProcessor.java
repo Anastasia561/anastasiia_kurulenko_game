@@ -4,12 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.taglibs.standard.lang.jstl.LessThanOrEqualsOperator;
 import ua.javarush.game.Game;
 
 import java.io.IOException;
 import java.io.InputStream;
-
 
 public class GameProcessor {
     private static final int POSITIVE_ANSWER_INDEX = 0;
@@ -28,11 +26,10 @@ public class GameProcessor {
     private int numberOfGames = 0;
     private String username = "User";
 
-    public GameProcessor(String path) {
-        createGame(path);
+    public GameProcessor() {
     }
 
-    private void createGame(String path) {
+    public void createGame(String path) {
         ObjectMapper objectMapper = new ObjectMapper();
         InputStream is = GameProcessor.class.getResourceAsStream(path);
         try {
@@ -40,7 +37,7 @@ public class GameProcessor {
             LOGGER.info("Game object created");
         } catch (IOException e) {
             LOGGER.error("Fail to parse json game object");
-            throw new RuntimeException(e);
+            throw new IllegalArgumentException(e);
         }
     }
 
@@ -108,7 +105,7 @@ public class GameProcessor {
     public String generateUsername(String providedUsername) {
         if (providedUsername != null) {
             username = providedUsername;
-            LOGGER.info("Username is "+username);
+            LOGGER.info("Username is " + username);
         }
         return username;
     }

@@ -11,7 +11,11 @@ import java.io.IOException;
 
 @WebServlet(name = "QuestionServlet", urlPatterns = "/questions")
 public class QuestionServlet extends HttpServlet {
-    private final GameProcessor gameProcessor = new GameProcessor("/game.json");
+    private final GameProcessor gameProcessor = new GameProcessor();
+
+    {
+        gameProcessor.createGame("/game.json");
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -20,13 +24,13 @@ public class QuestionServlet extends HttpServlet {
         req.getSession().setAttribute("ip", req.getRemoteAddr());
 
         req.setAttribute("message", gameProcessor.generateAnswerMessage(req.getParameter("choice")));
+
         if (gameProcessor.generateNextQuestionId(req.getParameter("choice"))) {
             req.setAttribute("progress", gameProcessor.generateProgress());
             req.setAttribute("questionText", gameProcessor.generateQuestionText());
             req.setAttribute("firstAnswerText", gameProcessor.generateFirstAnswerText());
             req.setAttribute("secondAnswerText", gameProcessor.generateSecondAnswerText());
             req.getRequestDispatcher("/question.jsp").forward(req, resp);
-
         } else {
             req.setAttribute("endGameMessage", gameProcessor.generateEndGameMessage());
             req.setAttribute("imgPath", gameProcessor.generateResultImgPath());

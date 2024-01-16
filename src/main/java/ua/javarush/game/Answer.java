@@ -12,5 +12,4 @@ public class Answer {
     private String text;
     private String message;
     private Integer nextQuestionId;
-
 }

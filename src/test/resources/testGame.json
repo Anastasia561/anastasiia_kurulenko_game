@@ -1,0 +1,22 @@
+{
+  "questions": [
+    {
+      "id": 0,
+      "text": "questionText0",
+      "answers": [
+        {
+          "id": 0,
+          "text": "answerText0",
+          "message": "answerMessage0",
+          "nextQuestionId": 1
+        },
+        {
+          "id": 1,
+          "text": "answerText1",
+          "message": "answerMessage1",
+          "nextQuestionId": -1
+        }
+      ]
+    }
+  ]
+}
