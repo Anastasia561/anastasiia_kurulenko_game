@@ -15,25 +15,29 @@ public class QuestionServlet extends HttpServlet {
 
     {
         gameProcessor.createGame("/game.json");
+        final String username;
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getSession().setAttribute("username", gameProcessor.generateUsername(req.getParameter("username")));
-        req.getSession().setAttribute("numberOfGames", gameProcessor.getNumberOfGames());
         req.getSession().setAttribute("ip", req.getRemoteAddr());
 
-        req.setAttribute("message", gameProcessor.generateAnswerMessage(req.getParameter("choice")));
+        int questionId = Integer.parseInt(req.getSession().getAttribute("questionId").toString());
+        String answerId = req.getParameter("choice");
 
-        if (gameProcessor.generateNextQuestionId(req.getParameter("choice"))) {
-            req.setAttribute("progress", gameProcessor.generateProgress());
-            req.setAttribute("questionText", gameProcessor.generateQuestionText());
-            req.setAttribute("firstAnswerText", gameProcessor.generateFirstAnswerText());
-            req.setAttribute("secondAnswerText", gameProcessor.generateSecondAnswerText());
+        req.setAttribute("message", gameProcessor.generateAnswerMessage(questionId - 1, answerId));
+
+        if (gameProcessor.checkNextQuestionId(questionId - 1, answerId)) {
+            req.setAttribute("progress", gameProcessor.generateProgress(questionId));
+            req.setAttribute("questionText", gameProcessor.generateQuestionText(questionId));
+            req.setAttribute("firstAnswerText", gameProcessor.generateFirstAnswerText(questionId));
+            req.setAttribute("secondAnswerText", gameProcessor.generateSecondAnswerText(questionId));
             req.getRequestDispatcher("/question.jsp").forward(req, resp);
         } else {
-            req.setAttribute("endGameMessage", gameProcessor.generateEndGameMessage());
-            req.setAttribute("imgPath", gameProcessor.generateResultImgPath());
+            req.setAttribute("endGameMessage", gameProcessor.generateEndGameMessage(questionId, answerId));
+            req.setAttribute("imgPath", gameProcessor.generateResultImgPath(questionId, answerId));
+            req.getSession().setAttribute("questionId", "0");
+            req.getSession().setAttribute("numberOfGames", gameProcessor.generateNumberOfGames(req.getSession().getAttribute("numberOfGames")));
             req.getRequestDispatcher("/result.jsp").forward(req, resp);
         }
     }

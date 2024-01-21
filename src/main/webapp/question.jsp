@@ -22,6 +22,8 @@
         <input type="submit" value="Answer" class="question-button">
     </form>
 </div>
+<% Object questionId = request.getSession().getAttribute("questionId");
+    request.getSession().setAttribute("questionId", (Integer.parseInt(questionId.toString())) + 1); %>
 
 <div class="progress-light">
     <div class="progress" style="width:${progress}%"></div>
@@ -30,7 +32,6 @@
 <div class="statistics-container">
     <h4 class="statistics-header">Statistics</h4>
     <p>IP Address: ${sessionScope.ip}</p>
-    <p>Username: ${sessionScope.username} </p>
     <p>Number of games played: ${sessionScope.numberOfGames} </p>
 </div>
 

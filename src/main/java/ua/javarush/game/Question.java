@@ -1,7 +1,10 @@
 package ua.javarush.game;
 
-import lombok.*;
-import ua.javarush.game.Answer;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.List;
 

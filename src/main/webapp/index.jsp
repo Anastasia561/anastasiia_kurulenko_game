@@ -22,6 +22,8 @@
         <input type="text" class="input-field" name="username" placeholder="username" autofocus><br>
         <input type="submit" value="Start Game" class="button">
     </form>
+    <% request.getSession().setAttribute("questionId", 0); %>
+
 </div>
 
 <div id="description-container">

@@ -12,7 +12,7 @@
     <h2 class="result-message-text">${message}</h2>
     <h2 class="result-text">${endGameMessage}</h2>
 
-    <img src="${imgPath}">
+    <img class="result-img" src="${imgPath}">
 
     <form action="/questions" method="post">
         <input type="submit" value="Start Again" class="button">
