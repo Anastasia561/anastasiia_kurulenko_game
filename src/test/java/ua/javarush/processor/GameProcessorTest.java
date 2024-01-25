@@ -15,57 +15,59 @@ public class GameProcessorTest {
     public static void init() {
         gameProcessor.createGame("/testGame.json");
     }
+
     @Test
-    public void createGameShouldThrowException(){
-        assertThrows(IllegalArgumentException.class, ()->gameProcessor.createGame(""));
+    public void createGameShouldThrowExceptionWhenPathIsInvalid() {
+        assertThrows(IllegalArgumentException.class, () -> gameProcessor.createGame(""));
     }
+
     @Test
-    public void generateQuestionText() {
+    public void generateQuestionTextWhenQuestionIdIsNotNull() {
         String expected = "Do you want to accept UFO challenge?";
         String actual = gameProcessor.generateQuestionText(0);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void generateFirstAnswerText() {
+    public void generateFirstAnswerTextWhenQuestionIdIsNotNull() {
         String expected = "Accept";
         String actual = gameProcessor.generateFirstAnswerText(0);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void generateSecondAnswerText() {
+    public void generateSecondAnswerTextWhenQuestionIdIsNotNull() {
         String expected = "Not accept";
         String actual = gameProcessor.generateSecondAnswerText(0);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void generateAnswerMessageShouldReturnNotEmptyString() {
+    public void generateAnswerMessageShouldReturnNotEmptyStringWhenQuestionIdIsNotNull() {
         String expected = "You accepted challenge";
         String actual = gameProcessor.generateAnswerMessage(0, "0");
         assertEquals(expected, actual);
     }
 
     @Test
-    public void generateAnswerMessageShouldReturnEmptyString() {
+    public void generateAnswerMessageShouldReturnEmptyStringWhenQuestionIdIsNull() {
         String expected = "";
         String actual = gameProcessor.generateAnswerMessage(0, null);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void checkNextQuestionIdWhenAnswerIndexIsNull() {
+    public void checkNextQuestionIdShouldReturnTrueWhenAnswerIndexIsNull() {
         assertTrue(gameProcessor.checkNextQuestionId(0, null));
     }
 
     @Test
-    public void checkNextQuestionIdWhenAnswerIndexIsNotFail() {
+    public void checkNextQuestionIdShouldReturnTrueWhenAnswerIndexIsNotFail() {
         assertTrue(gameProcessor.checkNextQuestionId(0, "0"));
     }
 
     @Test
-    public void checkNextQuestionIdWhenAnswerIndexIsFail() {
+    public void checkNextQuestionIdShouldReturnFalseWhenAnswerIndexIsFail() {
         assertFalse(gameProcessor.checkNextQuestionId(0, "1"));
     }
 
@@ -75,7 +77,7 @@ public class GameProcessorTest {
     }
 
     @Test
-    public void generateNumberOfGamesWhenNumberIsNull() {
+    public void generateNumberOfGamesShouldReturnOneWhenNumberIsNull() {
         assertEquals(1, gameProcessor.generateNumberOfGames(null));
     }
 

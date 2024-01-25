@@ -17,7 +17,7 @@ public class GameProcessor {
     private static final String FAILURE_MESSAGE = "Failure";
     private static final String VICTORY_IMG = "https://miro.medium.com/v2/resize:fit:1400/1*tGMPy19-xJa2p73q3qfEpA.jpeg";
     private static final String FAILURE_IMG = "https://as2.ftcdn.net/v2/jpg/02/45/98/61/1000_F_245986170_7OVFjzWCLqH6a8RBEfqHVKQcD8RXINpF.jpg";
-    private static Game game;
+    private Game game;
 
     public GameProcessor() {
     }
@@ -30,7 +30,7 @@ public class GameProcessor {
             log.info("Game object created");
         } catch (IOException e) {
             log.error("Fail to parse json game object");
-            throw new IllegalArgumentException(e);
+            throw new IllegalArgumentException("Fail to parse json game object");
         }
     }
 
